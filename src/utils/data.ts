@@ -10,7 +10,7 @@ let users: User[] = [];
 // Load users
 if (fs.existsSync(dataPath)) {
   const fileData = fs.readFileSync(dataPath, 'utf-8');
-  users = JSON.parse(fileData).users as User[];
+  users = JSON.parse(fileData) as User[];
 } else {
   fs.writeFileSync(dataPath, JSON.stringify(users, null, 2));
 }
