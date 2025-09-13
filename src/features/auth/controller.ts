@@ -26,9 +26,11 @@ export const registerUser = async (
     // saving the users to local json
     saveUser(newUser);
     const token = generateToken(newUser.id);
-    return res
-      .status(201)
-      .json({ message: 'User registered successfully', token });
+    return res.status(201).json({
+      message: 'User registered successfully',
+      token,
+      user: { id: newUser.id, username: newUser.username },
+    });
   } catch (error) {
     return res.status(500).json({ message: 'Error registering user' });
   }
@@ -51,5 +53,9 @@ export const loginUser = async (
   }
 
   const token = generateToken(user.id);
-  return res.status(200).json({ message: 'Login successful', token });
+  return res.status(200).json({
+    message: 'Login successful',
+    token,
+    user: { id: user.id, username: user.username },
+  });
 };
