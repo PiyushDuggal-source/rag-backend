@@ -1,11 +1,15 @@
 import ollama from 'ollama';
 import { retrieveChunksByKeyword } from './reterival';
+import { ChunkMetadata } from '~/types/types';
 
 export async function generateLLMResponse(
   query: string,
   ownerId: string,
   topK: number = 5
-): Promise<string> {
+): Promise<{
+  response: string;
+  contextChunks: ChunkMetadata[];
+}> {
   // Retrieve chunks
   const contextChunks = retrieveChunksByKeyword(query, ownerId, topK);
   console.log('Context Chunks:', contextChunks, contextChunks.length);
@@ -26,5 +30,8 @@ export async function generateLLMResponse(
   if (!response.response) {
     throw new Error('Failed to get response from LLM');
   }
-  return response.response;
+  return {
+    response: response.response,
+    contextChunks: contextChunks,
+  };
 }
