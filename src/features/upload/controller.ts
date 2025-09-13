@@ -45,9 +45,11 @@ export const uploadAndChunkDocument = async (req: Request, res: Response) => {
     };
     const existingDocs = loadDocuments();
     saveDocuments([...existingDocs, newDoc]);
-    return res
-      .status(201)
-      .json({ message: 'Document uploaded and chunked', document: newDoc });
+    return res.status(201).json({
+      message: 'Document uploaded and chunked',
+      document: newDoc,
+      success: true,
+    });
   } catch (error: any) {
     return res
       .status(500)
