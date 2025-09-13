@@ -1,0 +1,17 @@
+[
+  {
+    "id": "u1",
+    "username": "piyush",
+    "password": "password"
+  },
+  {
+    "id": "u2",
+    "username": "john",
+    "password": "password"
+  },
+  {
+    "id": "aa50ab18-5441-4b8c-a783-79b181eb4496",
+    "username": "piyush2",
+    "passwordHash": "$2b$10$BqESVZt0V7xZyyvhZbA.D.iqsM/GW2MDN31gQXWZMe.u0e6Y44.Aq"
+  }
+]
