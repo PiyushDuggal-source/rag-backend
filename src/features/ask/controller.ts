@@ -12,8 +12,11 @@ export const askController = async (req: Request, res: Response) => {
         .status(400)
         .json({ message: 'Query and ownerId are required' });
     }
-    const answer = await generateLLMResponse(query, ownerId);
-    return res.status(200).json({ answer });
+    const { response, contextChunks } = await generateLLMResponse(
+      query,
+      ownerId
+    );
+    return res.status(200).json({ answer: response, context: contextChunks });
   } catch (error) {
     return res
       .status(500)
