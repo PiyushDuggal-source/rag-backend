@@ -24,7 +24,10 @@ function saveDocuments(documents: DocumentMeta[]) {
 export const uploadAndChunkDocument = async (req: Request, res: Response) => {
   try {
     const file = req.file;
-    const ownerId = req.body.ownerId;
+    const ownerId = (req as any).user.userId;
+
+    console.log('File:', file);
+    console.log('Owner ID:', ownerId);
     if (!file || !ownerId) {
       return res.status(400).json({ message: 'File and ownerId are required' });
     }

@@ -26,7 +26,8 @@ export function retrieveChunksByKeyword(
       doc.ownerId === ownerId &&
       keywords.some((kw) => doc.text.toLowerCase().includes(kw))
   );
-  // Sort by number of keyword matches (simple relevance)
+
+  console.log('Filtered Chunks:', filtered, filtered.length);
   const scored = filtered.map((doc) => ({
     doc,
     score: keywords.reduce(
