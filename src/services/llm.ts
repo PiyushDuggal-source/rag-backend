@@ -8,15 +8,20 @@ export async function generateLLMResponse(
 ): Promise<string> {
   // Retrieve chunks
   const contextChunks = retrieveChunksByKeyword(query, ownerId, topK);
+  console.log('Context Chunks:', contextChunks, contextChunks.length);
   const contextText = contextChunks.map((chunk) => chunk.text).join('\n');
   const prompt = contextText
     ? `Context:\n${contextText}\n\nQuestion: ${query}`
     : query;
 
+  const systemPrompt = `You are a helpful assistant. Use the provided context to answer the question. If the context does not contain the answer, respond with "I don't know." Be concise and to the point.`;
+
   // Call model
   const response = await ollama.generate({
     model: 'llama2-uncensored',
     prompt,
+    system: systemPrompt,
+    keep_alive: '15m',
   });
   if (!response.response) {
     throw new Error('Failed to get response from LLM');
